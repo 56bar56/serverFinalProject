@@ -37,7 +37,7 @@ export const filterFlights = async (req, res) => {
             query.landing = { $lte: `${arrivalDate}T00:00:00` };
         }
 
-        console.log('Query:', query);
+        //console.log('Query:', query);
 
         const flights = await flightsCollection.find(query).toArray();
         console.log(flights.length); // Logs the number of flights found
