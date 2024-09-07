@@ -3,9 +3,12 @@ import bodyParser from 'body-parser'
 import routerToken from './routes/Tokens.js'
 import routerChats from './routes/Chats.js'
 import routerUsers from './routes/Users.js'
+import routerFlights from './routes/Flights.js';
+
 import { MongoClient, ObjectId } from 'mongodb';
 import http from 'http';
 import { Server } from 'socket.io';
+
 const server= express();
 //const server2 = http.createServer(server);
 const io = new Server(8080,{
@@ -20,6 +23,8 @@ server.use(bodyParser.urlencoded({extended: true}));
 server.use('/api/Tokens',routerToken);
 server.use('/api/Chats',routerChats);
 server.use('/api/Users',routerUsers);
+server.use('/api/Flights', routerFlights);
+
 io.on('connection', (socket) => {
     socket.on('msg', async (chatid) => {
         let user1;
