@@ -5,6 +5,7 @@ import routerChats from './routes/Chats.js'
 import routerUsers from './routes/Users.js'
 import routerFlights from './routes/Flights.js';
 import routerHotels from './routes/Hotels.js';
+import routerRestaurants from './routes/Restaurants.js';
 
 import { MongoClient, ObjectId } from 'mongodb';
 import http from 'http';
@@ -26,6 +27,8 @@ server.use('/api/Chats',routerChats);
 server.use('/api/Users',routerUsers);
 server.use('/api/Flights', routerFlights);
 server.use('/api/Hotels', routerHotels);
+server.use('/api/Restaurants', routerRestaurants);
+
 
 
 io.on('connection', (socket) => {

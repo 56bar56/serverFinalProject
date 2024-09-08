@@ -40,7 +40,7 @@ export const filterFlights = async (req, res) => {
         //console.log('Query:', query);
 
         const flights = await flightsCollection.find(query).toArray();
-        console.log(flights.length); // Logs the number of flights found
+        //console.log(flights.length); // Logs the number of flights found
         res.status(200).json(flights);
     } catch (error) {
         console.error('Error filtering flights:', error);

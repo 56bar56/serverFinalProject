@@ -1,4 +1,4 @@
-// models/Flight.js
+// models/Hotels.js
 import { MongoClient } from 'mongodb';
 
 // Function to connect to the hotels collection
