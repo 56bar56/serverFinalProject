@@ -6,6 +6,7 @@ import routerUsers from './routes/Users.js'
 import routerFlights from './routes/Flights.js';
 import routerHotels from './routes/Hotels.js';
 import routerRestaurants from './routes/Restaurants.js';
+import routerAttractions from './routes/Attractions.js';
 
 import { MongoClient, ObjectId } from 'mongodb';
 import http from 'http';
@@ -28,6 +29,8 @@ server.use('/api/Users',routerUsers);
 server.use('/api/Flights', routerFlights);
 server.use('/api/Hotels', routerHotels);
 server.use('/api/Restaurants', routerRestaurants);
+server.use('/api/Attractions', routerAttractions);
+
 
 
 

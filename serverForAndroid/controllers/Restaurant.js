@@ -13,13 +13,15 @@ export const filterRestaurants = async (req, res) => {
         let query = {};
 
         // Location filter (partial match, case-insensitive)
-        if (location !== undefined && location !== "") {
-            query.location = { $regex: location, $options: 'i' };  // Partial match, case-insensitive
+        if (location !== undefined && location.length > 0) {
+            query.$or = location.map(city => ({
+                location: { $regex: city, $options: 'i' }
+            }));
         }
 
-        // Cuisine filter (partial match, case-insensitive)
-        if (cuisine !== undefined && cuisine !== "") {
-            query.cuisine = { $regex: cuisine, $options: 'i' };    // Partial match, case-insensitive
+        // Cuisine filter (using $in for multiple cuisines)
+        if (cuisine !== undefined && cuisine.length > 0) {
+            query.cuisine = { $in: cuisine };
         }
 
         // Average cost filter (less than or equal to the given average cost)

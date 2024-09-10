@@ -39,7 +39,7 @@ export const filterHotels = async (req, res) => {
         }
 
         // Print the query for debugging
-        //console.log('Query:', query);
+        console.log('Query:', query);
 
         // Execute the query and return the results
         const hotels = await hotelsCollection.find(query).toArray();
