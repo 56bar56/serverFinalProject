@@ -42,11 +42,11 @@ export const filterAttractions = async (req, res) => {
         }
 
         // Log the final query object for debugging
-        console.log('Query:', JSON.stringify(query, null, 2)); // Pretty print the query
+        //console.log('Query:', JSON.stringify(query, null, 2)); // Pretty print the query
 
         // Execute the query
         const attractions = await attractionsCollection.find(query).toArray();
-        console.log('Attractions:', attractions);
+        //console.log('Attractions:', attractions);
         res.status(200).json(attractions);
     } catch (error) {
         console.error('Error filtering attractions:', error);
