@@ -1,5 +1,28 @@
 import { MongoClient } from 'mongodb';
+export const getUserTrips = async (req, res) => {
+    const { username, password } = req.query;
+    const client = new MongoClient('mongodb://127.0.0.1:27017');
 
+    try {
+        await client.connect();
+        const db = client.db("travelApp");
+        const tripsCollection = db.collection("trips");
+
+        // Find trips based on username and password
+        const trips = await tripsCollection.find({ username, password }).toArray();
+
+        if (trips.length === 0) {
+            return res.status(404).json({ message: "No trips found for this user" });
+        }
+
+        res.status(200).json(trips);
+    } catch (error) {
+        console.error('Error fetching user trips:', error);
+        res.status(500).json({ message: 'Server error' });
+    } finally {
+        await client.close();
+    }
+};
 export const createTrip = async (req, res) => {
     const { selectedFlight, selectedReturnedFlight, selectedHotel, selectedRestaurants, selectedAttractions, username, password } = req.body;
 
