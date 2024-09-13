@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 export const getUserTrips = async (req, res) => {
-    const { username, password } = req.query;
+    const { username } = req.query;
     const client = new MongoClient('mongodb://127.0.0.1:27017');
 
     try {
@@ -8,8 +8,7 @@ export const getUserTrips = async (req, res) => {
         const db = client.db("travelApp");
         const tripsCollection = db.collection("trips");
 
-        // Find trips based on username and password
-        const trips = await tripsCollection.find({ username, password }).toArray();
+         const trips = await tripsCollection.find({ username }).toArray();
 
         if (trips.length === 0) {
             return res.status(404).json({ message: "No trips found for this user" });
@@ -38,7 +37,6 @@ export const createTrip = async (req, res) => {
         // Create a trip object from the request body
         const newTrip = {
             username: username,
-            password: password,
             selectedFlight: selectedFlight,
             selectedReturnedFlight: selectedReturnedFlight,
             selectedHotel: selectedHotel,
