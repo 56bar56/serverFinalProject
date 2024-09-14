@@ -1,4 +1,9 @@
 import { MongoClient } from 'mongodb';
+/*
+import { OpenAI } from "openai";
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+*/
 
 export const filterFlights = async (req, res) => {
     const { maxPrice, departureLocation, arrivalLocation, departureDate, arrivalDate } = req.body;
@@ -49,3 +54,59 @@ export const filterFlights = async (req, res) => {
         await client.close();
     }
 };
+
+export const sortFlights = async (req, res) => {
+    try {
+        const flights = req.body;  // List of flights sent from the client
+
+        // Here, you can either use ChatGPT to sort the flights or implement custom logic to sort them
+        // For demonstration, let's say you sort them by price (ascending)
+        //console.log('got in to sort data(FLIGHT)');
+
+
+        flights.sort((a, b) => a.price - b.price);  // Sorting by price (as an example)
+
+        // Return sorted flights
+        res.status(200).json(flights);
+    } catch (err) {
+        console.error("Error sorting flights: ", err);
+        res.status(500).json({ message: 'Error sorting flights' });
+    }
+};
+/*
+export const sortFlights = async (req, res) => {
+    try {
+        const flights = req.body;
+
+        console.log("Received flights:", flights);
+
+        // Validate if flights is defined and is an array
+        if (!flights || !Array.isArray(flights)) {
+            return res.status(400).json({ success: false, error: 'Flights data is missing or invalid.' });
+        }
+
+        // Prepare the message for ChatGPT
+        const message = flights.map(flight => (
+            `Flight ${flight.flightNumber} from ${flight.departure} to ${flight.arrival} costs $${flight.price}.`
+        )).join("\n");
+
+        // Send a message to ChatGPT
+        const response = await openai.createChatCompletion({
+            model: "gpt-3.5-turbo",
+            messages: [
+                { role: "system", content: "You are an expert travel assistant." },
+                { role: "user", content: `Here is a list of flights: \n\n${message}\n\nPlease sort this list based on price and convenience.` }
+            ],
+        });
+
+        // Send ChatGPT's response back to the client
+        res.json({
+            success: true,
+            data: response.data.choices[0].message.content,
+        });
+    } catch (error) {
+        console.error("Error communicating with ChatGPT:", error);
+        res.status(500).json({ success: false, error: 'Failed to communicate with ChatGPT' });
+    }
+};
+*/

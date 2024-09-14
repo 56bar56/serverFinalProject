@@ -28,12 +28,12 @@ export const createTrip = async (req, res) => {
     const client = new MongoClient('mongodb://127.0.0.1:27017');
 
     try {
-        console.log('succeded connect to the db');
+        //console.log('succeded connect to the db');
         // Connect to MongoDB
         await client.connect();
         const db = client.db("travelApp");
         const tripsCollection = db.collection("trips");
-        console.log('succeded connect to the db and collection trips');
+        //console.log('succeded connect to the db and collection trips');
         // Create a trip object from the request body
         const newTrip = {
             username: username,
@@ -46,7 +46,7 @@ export const createTrip = async (req, res) => {
 
         // Insert the trip object into the database
         const result = await tripsCollection.insertOne(newTrip);
-        console.log('succeded indert the data');
+        //console.log('succeded indert the data');
 
         // Respond with success message
         res.status(201).json({ message: 'Trip created successfully', tripId: result.insertedId });
