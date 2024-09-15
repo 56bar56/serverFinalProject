@@ -34,7 +34,7 @@ server.use('/api/Restaurants', routerRestaurants);
 server.use('/api/Attractions', routerAttractions);
 server.use('/api/trips', tripsRouter);
 
-
+const uri = 'mongodb+srv://baraka5665:tJLuOxgP66gpNrrP@cluster0.mue6k.mongodb.net/travelApp?retryWrites=true&w=majority';
 
 
 
@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
     socket.on('msg', async (chatid) => {
         let user1;
         let user2;
-        const client= new MongoClient('mongodb://127.0.0.1:27017');
+        const client= new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
         let masseges=[];
         try{
             const db= client.db("whatsapp");

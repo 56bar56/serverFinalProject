@@ -1,7 +1,9 @@
 import { MongoClient } from 'mongodb';
 
+const uri = 'mongodb+srv://baraka5665:tJLuOxgP66gpNrrP@cluster0.mue6k.mongodb.net/travelApp?retryWrites=true&w=majority';
+
 async function getChats(userName) {
-    const client= new MongoClient('mongodb://127.0.0.1:27017');
+    const client= new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     let returnChats=[];
     let tokenOk=true;
     try {
@@ -35,7 +37,7 @@ async function getChats(userName) {
     }
 }
 async function postChats(userName, newUser) {
-    const client= new MongoClient('mongodb://127.0.0.1:27017');
+    const client= new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     let id;
     let con;
     let returnSituation=1;

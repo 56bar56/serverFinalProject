@@ -1,6 +1,9 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import admin from 'firebase-admin';
 import serviceAccount from '../targil4-ap2-firebase-adminsdk-wwcm3-8d57648f8e.json' assert { type: "json" };
+
+const uri = 'mongodb+srv://baraka5665:tJLuOxgP66gpNrrP@cluster0.mue6k.mongodb.net/travelApp?retryWrites=true&w=majority';
+
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
   });
@@ -28,7 +31,7 @@ admin.initializeApp({
 }
 
 async function getMessages(username,id) {
-    const client= new MongoClient('mongodb://127.0.0.1:27017');
+    const client= new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     let masseges=[];
     let returnSituation=1;
     try {
@@ -63,7 +66,7 @@ async function getMessages(username,id) {
   
 }
 async function postMessages(userName,id,content) {
-    const client= new MongoClient('mongodb://127.0.0.1:27017');
+    const client= new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     let returnSituation=1;
     try {
         const db= client.db("whatsapp");

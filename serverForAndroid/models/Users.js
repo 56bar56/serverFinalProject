@@ -1,7 +1,9 @@
 import { MongoClient } from 'mongodb';
+const uri = 'mongodb+srv://baraka5665:tJLuOxgP66gpNrrP@cluster0.mue6k.mongodb.net/travelApp?retryWrites=true&w=majority';
+
  async function postUsers(username,password,displayName,profilePic) {
     let answer=true;
-    const client= new MongoClient('mongodb://127.0.0.1:27017');
+    const client= new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     try {
         const db= client.db("whatsapp");
         const users=db.collection("users");
@@ -20,7 +22,7 @@ import { MongoClient } from 'mongodb';
 } 
 
  async function getUsers(id) {
-    const client= new MongoClient('mongodb://127.0.0.1:27017');
+    const client= new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     let result;
     try {
         const db= client.db("whatsapp");

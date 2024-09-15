@@ -1,9 +1,11 @@
 import { MongoClient } from 'mongodb';
 import jwt from "jsonwebtoken";
 const key="our key";
+const uri = 'mongodb+srv://baraka5665:tJLuOxgP66gpNrrP@cluster0.mue6k.mongodb.net/travelApp?retryWrites=true&w=majority';
+
  async function getToken(username,password) {
     let answer=false;
-    const client= new MongoClient('mongodb://127.0.0.1:27017');
+    const client= new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     try {
         const db= client.db("whatsapp");
         const users=db.collection("users");
