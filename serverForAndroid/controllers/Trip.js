@@ -28,7 +28,7 @@ export const getUserTrips = async (req, res) => {
 export const createTrip = async (req, res) => {
     const { selectedFlight, selectedReturnedFlight, selectedHotel, selectedRestaurants, selectedAttractions, username, password } = req.body;
 
-    const client = new MongoClient('mongodb://127.0.0.1:27017');
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
     try {
         //console.log('succeded connect to the db');
